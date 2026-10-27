@@ -4597,6 +4597,10 @@
     "link-routes-cover-page-links": {
       "category": "new",
       "message": "Link routes now also apply to links you follow on pages: a matching link opens as a new tab in the routed Space, and the page you followed it from stays where it is."
+    },
+    "link-routes-full-space-stays": {
+      "category": "internal",
+      "message": "A link on a page whose route names a Space at its tab limit loads in place instead of doing nothing."
     }
   }
 }

@@ -48,17 +48,21 @@ internal sealed partial class Device {
     /// The Space a link to `url` followed from a page of `spaceId` showing
     /// `shown` opens in instead of that Space: the one the first enabled route
     /// that matches names, when it is another Space of `workspace` that can
-    /// take a tab now, neither locked nor being deleted. Null when the link
-    /// stays where it was followed: it stays on the site the page shows, and
-    /// it stays when the first matching route names the page's own Space or
-    /// one that cannot open; a later route never takes its place. A locked
-    /// Space is never unlocked on a link's behalf.
+    /// take a tab now, neither locked, being deleted nor at its tab limit,
+    /// since the platform cancels the click before it opens the tab. Null when
+    /// the link stays where it was followed: it stays on the site the page
+    /// shows, and it stays when the first matching route names the page's own
+    /// Space or one that cannot open; a later route never takes its place. A
+    /// locked Space is never unlocked on a link's behalf.
     private static SpaceState? RoutedSpace(LinkPreferences preferences, string url, string? shown,
         NativeSessionAuthority workspace, Guid spaceId) {
         if (shown is not null && RememberedSite.SiteOf(shown) is { } site && site == RememberedSite.SiteOf(url)) return null;
         if (preferences.RoutedSpace(url, _ => true) is not { } routed || routed == spaceId) return null;
         var space = workspace.Current.Space(routed);
-        return space is not null && !workspace.IsDeleting(routed) && !workspace.IsLocked(space) ? space : null;
+        return space is not null && space.Tabs.Count < BrowserTabCollection.MaximumTabs && !workspace.IsDeleting(routed)
+            && !workspace.IsLocked(space)
+            ? space
+            : null;
     }
 
     /// What following a link from a page does: a page for a tab reads the

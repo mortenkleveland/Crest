@@ -7,7 +7,7 @@ keywords: [link routing, Air Traffic Control, URL rules, external links, page li
 
 # Route links to the right Space
 
-Link Routing is Crest’s equivalent of Arc’s Air Traffic Control: a matching link opened from another app goes to a specific Space before the normal external-link destination is considered, and a matching link you follow on a page opens as a new tab in that Space. The page you followed it from stays where it is. A link loads as usual when it stays on the site you are already on, when the first matching route names the Space you are in, or when you open it with the Peek modifier.
+Link Routing is Crest’s equivalent of Arc’s Air Traffic Control: a matching link opened from another app goes to a specific Space before the normal external-link destination is considered, and a matching link you follow on a page opens as a new tab in that Space. The page you followed it from stays where it is. A link loads as usual when it stays on the site you are already on, when the first matching route names the Space you are in or a Space that cannot take another tab, or when you open it with the Peek modifier.
 
 Routing applies to links you follow in a tab. Links in Peek, a Quick Window or a private window load as usual, a window a page opens by script, such as a sign-in popup, stays with the page that opened it, and an address typed into the address bar opens in the Space you are in.
 
